@@ -1,8 +1,10 @@
 from tkinter import *
 from decimal import  Decimal
+import math
 
 root = Tk()
 root.title('Calculator')
+root.iconbitmap('2.ico')
 
 input_ = Entry(root, width=40, borderwidth=5)
 input_.grid(row=0, column=0, columnspan=4, padx=10, pady=10)
@@ -56,6 +58,11 @@ def square():
     Square = Decimal(input_.get())
     mode = 'square'
 
+def Root():
+    global Root, mode
+    Root = Decimal(input_.get())
+    mode = "Root"
+
 def Ans():
     final = input_.get()
     if mode == 'add':
@@ -79,9 +86,14 @@ def Ans():
         input_.insert(0, result)
 
     if mode == 'square':
-        result = Square * Square
+        result = Square**2
         input_.delete(0, END)
         input_.insert(0, result)
+
+    if mode == "Root":
+        result = math.pow(Root,0.5)
+        input_.delete(0,END)
+        input_.insert(0, (result))
 
 button1 = Button(root, text="1", padx=25, pady=12, command=lambda: click(1))
 button2 = Button(root, text="2", padx=25, pady=12, command=lambda: click(2))
@@ -105,7 +117,7 @@ ans = Button(root, text="=", padx=130, pady=12, bg='#98d979',command=Ans).grid(r
 
 dot = Button(root, text=".", padx=26.47, pady=12, command=lambda: click('.')).grid(row=4, column=0)
 percent = Button(root, text="%", padx=25, pady=12, command=new).grid(row=5, column=1)
-Root = Button(root, text="√", padx=25, pady=12, command=new).grid(row=5, column=2)
+Root = Button(root, text="√", padx=25, pady=12, command=Root).grid(row=5, column=2)
 sq = Button(root, text="x^2", padx=18, pady=12, command=square).grid(row=5, column=0)
 
 button1.grid(row=1, column=0)

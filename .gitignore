@@ -1,4 +1,4 @@
-.gitingnore
+.gitignore
 button.py
 grid.py
 input-field.py
